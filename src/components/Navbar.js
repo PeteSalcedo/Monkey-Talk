@@ -14,7 +14,7 @@ class Navbar extends React.Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item float-right">
-                            <a className="nav-link" target="_blank" href="localhost:3000">Log Out</a>
+                            <a className="nav-link" target="_blank" href="">Log Out</a>
                         </li>
                     </ul>
                 </div>
