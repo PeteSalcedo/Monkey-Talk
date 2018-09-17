@@ -12,6 +12,17 @@
   font-weight: normal;
   font-style: normal; }
 
+body {
+background-image: url("holacoed.png");
+background-position: center;
+background-repeat: no-repeat;
+background-size: 550px;
+}
+
+ul {
+  list-style: none;
+}
+
 .fa {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
