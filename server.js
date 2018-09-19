@@ -22,6 +22,7 @@ createSocket = (user) => {
     users = Object.assign(users, updated_user);
 };
 
+// creates user and assigns a random uid
 createUser = (user) => {
     users = Object.assign({
         [user.uid] : {
@@ -98,3 +99,64 @@ io.on('connection', (socket) => {
         io.emit('updateUsersList', getUsers());
     });
 });
+
+// // Chat bot requests
+// // GET request
+// var data = JSON.stringify(false);
+//
+// var xhr = new XMLHttpRequest();
+// xhr.withCredentials = true;
+//
+// xhr.addEventListener("readystatechange", function () {
+//   if (this.readyState === this.DONE) {
+//     console.log(this.responseText);
+//   }
+// });
+//
+// xhr.open("GET", "https://snatchbot.me//bot/id%3Cbot_id%3E/api%3Capp_key%3E/aps%3Capp_secret%3E");
+//
+// xhr.send(data);
+//
+// // {
+// //
+// //     archived: (1 or 0)
+// //
+// //     date:"1970-01-01T00:00:00Z",
+// //
+// //     direction:"string", (from_bot or to_bot)
+// //
+// //     hasSeen:(1 or 0),
+// //
+// //     id:int,
+// //
+// //     isTest:(1 or 0),
+// //
+// //     message: string,
+// //
+// //     userToken: string (your user id)
+// //
+// // }
+//
+// // POST request
+// var data = JSON.stringify(false);
+//
+// var xhr = new XMLHttpRequest();
+// xhr.withCredentials = true;
+//
+// xhr.addEventListener("readystatechange", function () {
+//   if (this.readyState === this.DONE) {
+//     console.log(this.responseText);
+//   }
+// });
+//
+// xhr.open("POST", "https://snatchbot.me//bot/id%3Cbot_id%3E/api%3Capp_key%3E/aps%3Capp_secret%3E");
+//
+// xhr.send(data);
+//
+// {
+//
+//     messages: [int]string - response message
+//
+//     suggested: [int]string - suggested button, if there are any
+//
+// }
