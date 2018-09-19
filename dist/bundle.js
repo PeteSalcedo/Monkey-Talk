@@ -53364,7 +53364,7 @@ var _BotHome = __webpack_require__(/*! ./components/chat/BotHome */ "./src/compo
 
 var _BotHome2 = _interopRequireDefault(_BotHome);
 
-var _Videos = __webpack_require__(/*! ./components/chat/Videos */ "./src/components/chat/Videos.js");
+var _Videos = __webpack_require__(/*! ./components/Videos/Videos.js */ "./src/components/Videos/Videos.js");
 
 var _Videos2 = _interopRequireDefault(_Videos);
 
@@ -53576,6 +53576,50 @@ var Navbar = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Navbar;
+
+/***/ }),
+
+/***/ "./src/components/Videos/Videos.js":
+/*!*****************************************!*\
+  !*** ./src/components/Videos/Videos.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Videos = function Videos() {
+  return _react2.default.createElement(
+    "div",
+    null,
+    _react2.default.createElement(
+      "div",
+      null,
+      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/78ii7obZtQ4", frameborder: "9", allow: "autoplay; encrypted-media", allowfullscreen: true }),
+      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/4bwK3FPhAfw", frameborder: "2", allow: "autoplay; encrypted-media", allowfullscreen: true }),
+      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/h9wZQz5BSqU", frameborder: "9", allow: "autoplay; encrypted-media", allowfullscreen: true })
+    ),
+    _react2.default.createElement(
+      "div",
+      null,
+      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/1boBEkbwvok", frameborder: "15", allow: "autoplay; encrypted-media", allowfullscreen: true }),
+      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/Ima_UcZw6QY", frameborder: "9", allow: "autoplay; encrypted-media", allowfullscreen: true }),
+      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/QUPjXYLWsmI", frameborder: "9", allow: "autoplay; encrypted-media", allowfullscreen: true })
+    )
+  );
+};
+exports.default = Videos;
 
 /***/ }),
 
@@ -54892,50 +54936,6 @@ var Users = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Users;
-
-/***/ }),
-
-/***/ "./src/components/chat/Videos.js":
-/*!***************************************!*\
-  !*** ./src/components/chat/Videos.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Videos = function Videos() {
-  return _react2.default.createElement(
-    "div",
-    null,
-    _react2.default.createElement(
-      "div",
-      null,
-      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/78ii7obZtQ4", frameborder: "9", allow: "autoplay; encrypted-media", allowfullscreen: true }),
-      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/4bwK3FPhAfw", frameborder: "2", allow: "autoplay; encrypted-media", allowfullscreen: true }),
-      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/h9wZQz5BSqU", frameborder: "9", allow: "autoplay; encrypted-media", allowfullscreen: true })
-    ),
-    _react2.default.createElement(
-      "div",
-      null,
-      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/1boBEkbwvok", frameborder: "15", allow: "autoplay; encrypted-media", allowfullscreen: true }),
-      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/Ima_UcZw6QY", frameborder: "9", allow: "autoplay; encrypted-media", allowfullscreen: true }),
-      _react2.default.createElement("iframe", { width: "400", height: "315", src: "https://www.youtube.com/embed/QUPjXYLWsmI", frameborder: "9", allow: "autoplay; encrypted-media", allowfullscreen: true })
-    )
-  );
-};
-exports.default = Videos;
 
 /***/ }),
 

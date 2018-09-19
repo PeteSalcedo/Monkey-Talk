@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch  } from "react-router-dom";
 import Home from "./home"
 import BotHome from "./components/chat/BotHome"
-import Videos from "./components/chat/Videos"
+import Videos from "./components/Videos/Videos.js"
 import Links from "./components/Links"
 import BotChat from "./components/chat/BotChat"
 
