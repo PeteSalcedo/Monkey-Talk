@@ -1,124 +1,150 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css?family=Abel|Montserrat');
 
-html,body {
+body,
+html {
+  color: #23ff00;
+  background-color: #121417;
   font-family: 'Montserrat', sans-serif;
   height: 100%;
   width: 100%;
-  margin : 0px;
-  padding : 0px;
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: #23ff00;
+}
+navbar-brand{
+  color: #23ff00;
+
 }
 
-#root{
-  position:relative;
+#root {
+  color: #23ff00;
+  position: relative;
   height: 100%;
   width: 100%;
   padding-top: 56px;
 
-  .enter-chat{
+  .enter-chat {
     display: block;
-    position:relative;
+    position: relative;
     height: 100%;
     width: 100%;
   }
 
-  .chat{
+  .navbar-dark .navbar-brand {
+    color: #65f300;
+}
+
+.form-control {
+    color: #23ff00;
+}
+.btn-outline-secondary {
+
+    border-color: #23ff00;
+}
+
+  .chat {
     display: block;
-    position:relative;
+    position: relative;
     height: 100%;
     width: 100%;
 
-    .users, .messages{
-      padding: 0px;
+    .messages,
+    .users {
+      padding: 0;
       float: left;
     }
 
     .users {
-
-      .user{
-        border-bottom : 1px solid #e9ebee;
+      .user {
+        border-bottom: 1px solid #e9ebee;
         padding: 10px;
 
-        .fa-user{
-          color :#343a40;
+        .fa-user {
+          color: #343a40;
         }
       }
     }
 
-    .messages{
+    .messages {
       border-left: 1px solid #e9ebee;
-      overflow:auto;
+      overflow: auto;
 
-      .message{
+      .message {
         padding: 10px;
         display: block;
         min-height: 50px;
-        height : auto !important;
-        clear:both;
+        height: auto !important;
+        clear: both;
 
-        .username, .data{
+        .data,
+        .username {
           display: inline-block;
-          float:left;
+          float: left;
           margin-right: 10px;
         }
       }
 
-      .no-message{
+      .no-message {
         margin: 10px;
       }
     }
 
-    .chatbox, .gifbox{
-      position:fixed;
-      bottom: 0px;
-      padding: 0px;
+    .chatbox,
+    .gifbox {
+      position: fixed;
+      bottom: 0;
+      padding: 0;
     }
 
-    .gifbox{
+    .gifbox {
       height: 200px;
-      width : 100%;
+      width: 100%;
       border-left: 1px solid #e9ebee;
-      .input-group{
-        padding: 0px;
+
+      .input-group {
+        padding: 0;
       }
 
-      .gifs{
+      .gifs {
         height: 160px !important;
-        overflow-y : scroll;
+        overflow-y: scroll;
         padding: 5px;
 
-        .gif{
-          position:relative;
+        .gif {
+          position: relative;
           display: inline-block;
-          float:left;
+          float: left;
           margin-right: 5px;
           padding-bottom: 5px;
 
-          &:hover{
-            .share{
+          &:hover {
+            .share {
               display: block;
             }
           }
 
-          .share{
-            position:absolute;
-            top:0;
-            right:0;
-            bottom:0;
-            left:0;
-            margin:auto;
+          .share {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
             height: 30px;
             width: 30px;
             font-size: 30px;
             cursor: pointer;
-            color:white;
+            color: white;
             display: none;
           }
         }
 
-        .searching{
+        .searching {
           display: block;
-          color:grey;
+          color: grey;
           font-size: 18px;
         }
       }
