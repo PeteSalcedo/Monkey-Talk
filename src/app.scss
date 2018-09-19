@@ -1,153 +1,153 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import url('https://fonts.googleapis.com/css?family=Abel|Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Abel%7CMontserrat');
 
 body,
 html {
-  color: #23ff00;
-  background-color: #121417;
-  font-family: 'Montserrat', sans-serif;
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+ color: #23ff00;
+ background-color: #121417;
+ font-family: 'Montserrat', sans-serif;
+ height: 100%;
+ width: 100%;
+ margin: 0;
+ padding: 0;
 }
 a {
-  color: #23ff00;
+ color: #23ff00;
 }
 navbar-brand{
-  color: #23ff00;
+ color: #23ff00;
 
 }
 
 #root {
-  color: #23ff00;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  padding-top: 56px;
+ color: #23ff00;
+ position: relative;
+ height: 100%;
+ width: 100%;
+ padding-top: 56px;
 
-  .enter-chat {
-    display: block;
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
+ .enter-chat {
+   display: block;
+   position: relative;
+   height: 100%;
+   width: 100%;
+ }
 
-  .navbar-dark .navbar-brand {
-    color: #65f300;
+ .navbar-dark .navbar-brand {
+   color: #65f300;
 }
 
 .form-control {
-    color: #23ff00;
+   color: #23ff00;
 }
 .btn-outline-secondary {
 
-    border-color: #23ff00;
+   border-color: #23ff00;
 }
 
-  .chat {
-    display: block;
-    position: relative;
-    height: 100%;
-    width: 100%;
+ .chat {
+   display: block;
+   position: relative;
+   height: 100%;
+   width: 100%;
 
-    .messages,
-    .users {
-      padding: 0;
-      float: left;
-    }
+   .messages,
+   .users {
+     padding: 0;
+     float: left;
+   }
 
-    .users {
-      .user {
-        border-bottom: 1px solid #e9ebee;
-        padding: 10px;
+   .users {
+     .user {
+       border-bottom: 1px solid #e9ebee;
+       padding: 10px;
 
-        .fa-user {
-          color: #343a40;
-        }
-      }
-    }
+       .fa-user {
+         color: #343a40;
+       }
+     }
+   }
 
-    .messages {
-      border-left: 1px solid #e9ebee;
-      overflow: auto;
+   .messages {
+     border-left: 1px solid #e9ebee;
+     overflow: auto;
 
-      .message {
-        padding: 10px;
-        display: block;
-        min-height: 50px;
-        height: auto !important;
-        clear: both;
+     .message {
+       padding: 10px;
+       display: block;
+       min-height: 50px;
+       height: auto !important;
+       clear: both;
 
-        .data,
-        .username {
-          display: inline-block;
-          float: left;
-          margin-right: 10px;
-        }
-      }
+       .data,
+       .username {
+         display: inline-block;
+         float: left;
+         margin-right: 10px;
+       }
+     }
 
-      .no-message {
-        margin: 10px;
-      }
-    }
+     .no-message {
+       margin: 10px;
+     }
+   }
 
-    .chatbox,
-    .gifbox {
-      position: fixed;
-      bottom: 0;
-      padding: 0;
-    }
+   .chatbox,
+   .gifbox {
+     position: fixed;
+     bottom: 0;
+     padding: 0;
+   }
 
-    .gifbox {
-      height: 200px;
-      width: 100%;
-      border-left: 1px solid #e9ebee;
+   .gifbox {
+     height: 200px;
+     width: 100%;
+     border-left: 1px solid #e9ebee;
 
-      .input-group {
-        padding: 0;
-      }
+     .input-group {
+       padding: 0;
+     }
 
-      .gifs {
-        height: 160px !important;
-        overflow-y: scroll;
-        padding: 5px;
+     .gifs {
+       height: 160px !important;
+       overflow-y: scroll;
+       padding: 5px;
 
-        .gif {
-          position: relative;
-          display: inline-block;
-          float: left;
-          margin-right: 5px;
-          padding-bottom: 5px;
+       .gif {
+         position: relative;
+         display: inline-block;
+         float: left;
+         margin-right: 5px;
+         padding-bottom: 5px;
 
-          &:hover {
-            .share {
-              display: block;
-            }
-          }
+         &:hover {
+           .share {
+             display: block;
+           }
+         }
 
-          .share {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            margin: auto;
-            height: 30px;
-            width: 30px;
-            font-size: 30px;
-            cursor: pointer;
-            color: white;
-            display: none;
-          }
-        }
+         .share {
+           position: absolute;
+           top: 0;
+           right: 0;
+           bottom: 0;
+           left: 0;
+           margin: auto;
+           height: 30px;
+           width: 30px;
+           font-size: 30px;
+           cursor: pointer;
+           color: white;
+           display: none;
+         }
+       }
 
-        .searching {
-          display: block;
-          color: grey;
-          font-size: 18px;
-        }
-      }
-    }
-  }
+       .searching {
+         display: block;
+         color: grey;
+         font-size: 18px;
+       }
+     }
+   }
+ }
 }

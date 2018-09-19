@@ -53360,6 +53360,10 @@ var _home = __webpack_require__(/*! ./home */ "./src/home.js");
 
 var _home2 = _interopRequireDefault(_home);
 
+var _BotHome = __webpack_require__(/*! ./components/chat/BotHome */ "./src/components/chat/BotHome.js");
+
+var _BotHome2 = _interopRequireDefault(_BotHome);
+
 var _Videos = __webpack_require__(/*! ./components/chat/Videos */ "./src/components/chat/Videos.js");
 
 var _Videos2 = _interopRequireDefault(_Videos);
@@ -53367,6 +53371,10 @@ var _Videos2 = _interopRequireDefault(_Videos);
 var _Links = __webpack_require__(/*! ./components/Links */ "./src/components/Links.js");
 
 var _Links2 = _interopRequireDefault(_Links);
+
+var _BotChat = __webpack_require__(/*! ./components/chat/BotChat */ "./src/components/chat/BotChat.js");
+
+var _BotChat2 = _interopRequireDefault(_BotChat);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53399,6 +53407,7 @@ var App = function (_React$Component) {
                         _reactRouterDom.Switch,
                         null,
                         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/BotHome', component: _BotHome2.default }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/Videos', component: _Videos2.default })
                     )
                 )
@@ -53467,8 +53476,17 @@ var Links = function Links() {
         null,
         _react2.default.createElement(
           _reactRouterDom.Link,
+          { to: "/BotHome" },
+          "Monkey Bot"
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Link,
           { to: "/Videos" },
-          "videos"
+          "Videos"
         )
       )
     )
@@ -53558,6 +53576,479 @@ var Navbar = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Navbar;
+
+/***/ }),
+
+/***/ "./src/components/chat/BotChat.js":
+/*!****************************************!*\
+  !*** ./src/components/chat/BotChat.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Users = __webpack_require__(/*! ./Users */ "./src/components/chat/Users.js");
+
+var _Users2 = _interopRequireDefault(_Users);
+
+var _BotMessages = __webpack_require__(/*! ./BotMessages */ "./src/components/chat/BotMessages.js");
+
+var _BotMessages2 = _interopRequireDefault(_BotMessages);
+
+var _EnterChat = __webpack_require__(/*! ./EnterChat */ "./src/components/chat/EnterChat.js");
+
+var _EnterChat2 = _interopRequireDefault(_EnterChat);
+
+var _socket = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
+
+var _socket2 = _interopRequireDefault(_socket);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BotChat = function (_React$Component) {
+    _inherits(BotChat, _React$Component);
+
+    function BotChat(props) {
+        _classCallCheck(this, BotChat);
+
+        var _this = _possibleConstructorReturn(this, (BotChat.__proto__ || Object.getPrototypeOf(BotChat)).call(this, props));
+
+        _this.socket = null;
+        _this.state = {
+            username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
+            uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : _this.generateUID(),
+            chat_ready: false,
+            users: [],
+            messages: [],
+            message: ''
+        };
+        return _this;
+    }
+
+    _createClass(BotChat, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            if (this.state.username.length) {
+                this.initChat();
+            }
+        }
+    }, {
+        key: "generateUID",
+        value: function generateUID() {
+            var text = '';
+            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            for (var i = 0; i < 15; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            localStorage.setItem('uid', text);
+            return text;
+        }
+    }, {
+        key: "setUsername",
+        value: function setUsername(username, e) {
+            var _this2 = this;
+
+            this.setState({
+                username: username
+            }, function () {
+                _this2.initChat();
+            });
+        }
+
+        // // refactor for bot api
+        //     sendMessage(message, e){
+        //         console.log(message);
+        //         this.setState({
+        //             messages : this.state.messages.concat([{
+        //                username : localStorage.getItem('username'),
+        //                uid : localStorage.getItem('uid'),
+        //                message : message,
+        //            }])
+        //         });
+        //         this.socket.emit('message', {
+        //             username : localStorage.getItem('username'),
+        //             uid : localStorage.getItem('uid'),
+        //             message : message,
+        //         });
+        //         this.scrollToBottom();
+        //     }
+
+    }, {
+        key: "scrollToBottom",
+        value: function scrollToBottom() {
+            var messages = document.getElementsByClassName('messages')[0];
+            messages.scrollTop = messages.scrollHeight - messages.clientHeight;
+        }
+
+        // // refactor for bot messages state
+        //     initChat(){
+        //         localStorage.setItem('username', this.state.username);
+        //         this.setState({
+        //             chat_ready : true,
+        //         });
+        //         this.socket = socketIOClient('ws://localhost:8989', {
+        //             query : 'username='+this.state.username+'&uid='+this.state.uid
+        //         });
+        //
+        //         this.socket.on('updateUsersList', function (users) {
+        //             console.log(users);
+        //             this.setState({
+        //                 users : users
+        //             });
+        //         }.bind(this));
+        //
+        //         this.socket.on('message', function (message) {
+        //             this.setState({
+        //                 messages : this.state.messages.concat([message])
+        //             });
+        //             this.scrollToBottom();
+        //         }.bind(this));
+        //     }
+
+    }, {
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { className: "chat" },
+                this.state.chat_ready ? _react2.default.createElement(
+                    _react2.default.Fragment,
+                    null,
+                    _react2.default.createElement(_Users2.default, { users: this.state.users }),
+                    _react2.default.createElement(_BotMessages2.default, {
+                        sendMessage: this.sendMessage.bind(this),
+                        messages: this.state.messages
+                    })
+                ) : _react2.default.createElement(_EnterChat2.default, {
+                    setUsername: this.setUsername.bind(this)
+                })
+            );
+        }
+    }]);
+
+    return BotChat;
+}(_react2.default.Component);
+
+exports.default = BotChat;
+
+/***/ }),
+
+/***/ "./src/components/chat/BotChatBox.js":
+/*!*******************************************!*\
+  !*** ./src/components/chat/BotChatBox.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BotChatBox = function (_React$Component) {
+    _inherits(BotChatBox, _React$Component);
+
+    function BotChatBox(props) {
+        _classCallCheck(this, BotChatBox);
+
+        var _this = _possibleConstructorReturn(this, (BotChatBox.__proto__ || Object.getPrototypeOf(BotChatBox)).call(this, props));
+
+        _this.state = {
+            message: ''
+        };
+        return _this;
+    }
+
+    _createClass(BotChatBox, [{
+        key: 'onChange',
+        value: function onChange(e) {
+            this.setState({
+                message: e.target.value
+            });
+        }
+    }, {
+        key: 'onKeyUp',
+        value: function onKeyUp(e) {
+            if (e.key === 'Enter') {
+                if (this.state.message.length) {
+                    this.props.sendMessage({
+                        type: 'message',
+                        text: this.state.message
+                    });
+                    this.setState({ message: '' });
+                } else {
+                    alert('Please enter a message');
+                }
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                { className: 'input-group chatbox col-xs-12 col-sm-12 col-md-8 col-lg-10' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'input-group-prepend' },
+                    _react2.default.createElement(
+                        'button',
+                        {
+                            className: 'btn btn-outline-secondary',
+                            type: 'button',
+                            onClick: this.props.toggleGif
+                        },
+                        _react2.default.createElement('i', { className: 'fa fa-image' }),
+                        ' GIF'
+                    )
+                ),
+                _react2.default.createElement('input', {
+                    className: 'form-control',
+                    placeholder: 'Say hi to the Monkey Talk Bot!',
+                    value: this.state.message,
+                    onChange: this.onChange.bind(this),
+                    onKeyUp: this.onKeyUp.bind(this)
+                })
+            );
+        }
+    }]);
+
+    return BotChatBox;
+}(_react2.default.Component);
+
+exports.default = BotChatBox;
+
+/***/ }),
+
+/***/ "./src/components/chat/BotHome.js":
+/*!****************************************!*\
+  !*** ./src/components/chat/BotHome.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+__webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+
+__webpack_require__(/*! font-awesome/css/font-awesome.css */ "./node_modules/font-awesome/css/font-awesome.css");
+
+__webpack_require__(/*! ../../app.scss */ "./src/app.scss");
+
+var _Navbar = __webpack_require__(/*! ../Navbar */ "./src/components/Navbar.js");
+
+var _Navbar2 = _interopRequireDefault(_Navbar);
+
+var _BotChat = __webpack_require__(/*! ./BotChat */ "./src/components/chat/BotChat.js");
+
+var _BotChat2 = _interopRequireDefault(_BotChat);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BotHome = function (_React$Component) {
+    _inherits(BotHome, _React$Component);
+
+    function BotHome() {
+        _classCallCheck(this, BotHome);
+
+        return _possibleConstructorReturn(this, (BotHome.__proto__ || Object.getPrototypeOf(BotHome)).apply(this, arguments));
+    }
+
+    _createClass(BotHome, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _react2.default.Fragment,
+                null,
+                _react2.default.createElement(_Navbar2.default, null),
+                _react2.default.createElement(_BotChat2.default, null)
+            );
+        }
+    }]);
+
+    return BotHome;
+}(_react2.default.Component);
+
+exports.default = BotHome;
+
+/***/ }),
+
+/***/ "./src/components/chat/BotMessages.js":
+/*!********************************************!*\
+  !*** ./src/components/chat/BotMessages.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _BotChatBox = __webpack_require__(/*! ./BotChatBox */ "./src/components/chat/BotChatBox.js");
+
+var _BotChatBox2 = _interopRequireDefault(_BotChatBox);
+
+var _GifBox = __webpack_require__(/*! ./GifBox */ "./src/components/chat/GifBox.js");
+
+var _GifBox2 = _interopRequireDefault(_GifBox);
+
+var _Message = __webpack_require__(/*! ./Message */ "./src/components/chat/Message.js");
+
+var _Message2 = _interopRequireDefault(_Message);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BotMessages = function (_React$Component) {
+    _inherits(BotMessages, _React$Component);
+
+    function BotMessages(props) {
+        _classCallCheck(this, BotMessages);
+
+        var _this = _possibleConstructorReturn(this, (BotMessages.__proto__ || Object.getPrototypeOf(BotMessages)).call(this, props));
+
+        _this.state = {
+            height: 0,
+            messages: props.messages,
+            gif: false
+        };
+        return _this;
+    }
+
+    _createClass(BotMessages, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            this.assignHeight();
+            window.addEventListener("resize", this.assignHeight.bind(this));
+        }
+    }, {
+        key: "assignHeight",
+        value: function assignHeight() {
+            var chat_height = this.state.gif ? 200 : 35;
+            var _docHeight = document.height !== undefined ? document.height : document.body.offsetHeight;
+            this.setState({
+                height: _docHeight - 65 - chat_height
+            });
+        }
+    }, {
+        key: "componentWillUnmount",
+        value: function componentWillUnmount() {
+            window.removeEventListener("resize", this.assignHeight.bind(this));
+        }
+    }, {
+        key: "toggleGif",
+        value: function toggleGif(e) {
+            var _this2 = this;
+
+            this.setState({
+                gif: !this.state.gif
+            }, function () {
+                _this2.assignHeight();
+            });
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { className: "messages col-xs-12 col-sm-12 col-md-8 col-lg-10", style: { height: this.state.height + 'px' } },
+                this.state.messages.length ? this.state.messages.map(function (message, i) {
+                    return _react2.default.createElement(BotMessage, { key: i, message: message });
+                }) : _react2.default.createElement(
+                    "div",
+                    { className: "no-message" },
+                    "You have not contacted Code Monkeys"
+                ),
+                this.state.gif ? _react2.default.createElement(_GifBox2.default, {
+                    sendMessage: this.props.sendMessage,
+                    toggleGif: this.toggleGif.bind(this)
+                }) : _react2.default.createElement(ChatBox, {
+                    sendMessage: this.props.sendMessage,
+                    toggleGif: this.toggleGif.bind(this)
+                })
+            );
+        }
+    }], [{
+        key: "getDerivedStateFromProps",
+        value: function getDerivedStateFromProps(nextProps, prevState) {
+            return {
+                messages: nextProps.messages
+            };
+        }
+    }]);
+
+    return BotMessages;
+}(_react2.default.Component);
+
+exports.default = BotMessages;
 
 /***/ }),
 
@@ -54485,6 +54976,14 @@ var _Navbar2 = _interopRequireDefault(_Navbar);
 var _Chat = __webpack_require__(/*! ./components/chat/Chat */ "./src/components/chat/Chat.js");
 
 var _Chat2 = _interopRequireDefault(_Chat);
+
+var _BotChat = __webpack_require__(/*! ./components/chat/BotChat */ "./src/components/chat/BotChat.js");
+
+var _BotChat2 = _interopRequireDefault(_BotChat);
+
+var _BotHome = __webpack_require__(/*! ./components/chat/BotHome */ "./src/components/chat/BotHome.js");
+
+var _BotHome2 = _interopRequireDefault(_BotHome);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
