@@ -8,7 +8,10 @@ const Links = () => (
           <Link to="/">Chat</Link>
         </li>
         <li>
-          <Link to="/Videos">videos</Link>
+          <Link to="/BotHome">Monkey Bot</Link>
+        </li>
+        <li>
+          <Link to="/Videos">Videos</Link>
         </li>
       </ul>
   </div>
