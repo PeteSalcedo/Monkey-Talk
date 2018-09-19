@@ -152,3 +152,11 @@ io.on('connection', (socket) => {
 // xhr.open("POST", "https://snatchbot.me//bot/id%3Cbot_id%3E/api%3Capp_key%3E/aps%3Capp_secret%3E");
 //
 // xhr.send(data);
+//
+// {
+//
+//     messages: [int]string - response message
+//
+//     suggested: [int]string - suggested button, if there are any
+//
+// }
