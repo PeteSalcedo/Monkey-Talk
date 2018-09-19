@@ -2,6 +2,7 @@ import React from 'react';
 import ChatBox from "./ChatBox";
 import GifBox from "./GifBox";
 import Message from "./Message";
+import emojiBox from "./emojiBox";
 
 class Messages extends React.Component {
 
