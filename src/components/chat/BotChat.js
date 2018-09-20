@@ -19,11 +19,11 @@ class BotChat extends React.Component {
         }
     }
 
-    componentDidMount(){
-        if(this.state.username.length) {
-            this.initChat();
-        }
-    }
+    // componentDidMount(){
+    //     if(this.state.username.length) {
+    //         this.initChat();
+    //     }
+    // }
 
     generateUID(){
         let text = '';
