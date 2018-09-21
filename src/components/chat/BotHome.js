@@ -4,7 +4,7 @@ import 'bootstrap';
 import 'font-awesome/css/font-awesome.css';
 import '../../app.scss';
 import Navbar from '../Navbar';
-import BotChat from './BotChat';
+// import BotChat from './BotChat';
 
 
 
@@ -14,7 +14,7 @@ class BotHome extends React.Component{
         return(
             <React.Fragment>
                 <Navbar />
-                <BotChat />
+                  {/* <BotChat /> */}
 
 
             </React.Fragment>

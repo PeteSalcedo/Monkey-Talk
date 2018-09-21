@@ -35,13 +35,13 @@ class BotChat extends React.Component {
         return text;
     }
 
-    setUsername(username, e){
-        this.setState({
-            username : username
-        }, () => {
-            this.initChat();
-        });
-    }
+    // setUsername(username, e){
+    //     this.setState({
+    //         username : username
+    //     }, () => {
+    //         this.initChat();
+    //     });
+    // }
 
 // // refactor for bot api
 //     sendMessage(message, e){
@@ -106,7 +106,8 @@ class BotChat extends React.Component {
                     <EnterChat
                         setUsername={this.setUsername.bind(this)}
                     />
-                )}
+                )
+              }
             </div>
         )
     }
