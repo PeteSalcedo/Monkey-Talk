@@ -53696,17 +53696,14 @@ var BotChat = function (_React$Component) {
             localStorage.setItem('uid', text);
             return text;
         }
-    }, {
-        key: "setUsername",
-        value: function setUsername(username, e) {
-            var _this2 = this;
 
-            this.setState({
-                username: username
-            }, function () {
-                _this2.initChat();
-            });
-        }
+        // setUsername(username, e){
+        //     this.setState({
+        //         username : username
+        //     }, () => {
+        //         this.initChat();
+        //     });
+        // }
 
         // // refactor for bot api
         //     sendMessage(message, e){
@@ -53922,10 +53919,6 @@ var _Navbar = __webpack_require__(/*! ../Navbar */ "./src/components/Navbar.js")
 
 var _Navbar2 = _interopRequireDefault(_Navbar);
 
-var _BotChat = __webpack_require__(/*! ./BotChat */ "./src/components/chat/BotChat.js");
-
-var _BotChat2 = _interopRequireDefault(_BotChat);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -53933,6 +53926,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import BotChat from './BotChat';
+
 
 var BotHome = function (_React$Component) {
     _inherits(BotHome, _React$Component);
@@ -53949,8 +53945,7 @@ var BotHome = function (_React$Component) {
             return _react2.default.createElement(
                 _react2.default.Fragment,
                 null,
-                _react2.default.createElement(_Navbar2.default, null),
-                _react2.default.createElement(_BotChat2.default, null)
+                _react2.default.createElement(_Navbar2.default, null)
             );
         }
     }]);
@@ -54967,14 +54962,6 @@ var _Navbar2 = _interopRequireDefault(_Navbar);
 var _Chat = __webpack_require__(/*! ./components/chat/Chat */ "./src/components/chat/Chat.js");
 
 var _Chat2 = _interopRequireDefault(_Chat);
-
-var _BotChat = __webpack_require__(/*! ./components/chat/BotChat */ "./src/components/chat/BotChat.js");
-
-var _BotChat2 = _interopRequireDefault(_BotChat);
-
-var _BotHome = __webpack_require__(/*! ./components/chat/BotHome */ "./src/components/chat/BotHome.js");
-
-var _BotHome2 = _interopRequireDefault(_BotHome);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
