@@ -53629,8 +53629,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
@@ -53659,122 +53657,37 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// const Component = React.createClass({
+//   iframe: function () {
+//     return {
+//       __html: this.props.iframe
+//     }
+//   },
+//
+//   render: function() {
+//     return (
+//       <div>
+//         <div dangerouslySetInnerHTML={ this.iframe() } />
+//       </div>
+//     );
+//   }
+// });
+//
+// const iframe = '<iframe src=" https://snatchbot.me/webchat/?botID=29961&appID=gKcD32Tvtc1gVMXJ2jZI" width="540" height="450"></iframe>';
+//
+// ReactDOM.render(
+//   <Component iframe={iframe} />,
+//   document.getElementById('container')
+// );
+
 var BotChat = function (_React$Component) {
     _inherits(BotChat, _React$Component);
 
-    function BotChat(props) {
+    function BotChat() {
         _classCallCheck(this, BotChat);
 
-        var _this = _possibleConstructorReturn(this, (BotChat.__proto__ || Object.getPrototypeOf(BotChat)).call(this, props));
-
-        _this.socket = null;
-        _this.state = {
-            username: localStorage.getItem('username') ? localStorage.getItem('username') : '',
-            uid: localStorage.getItem('uid') ? localStorage.getItem('uid') : _this.generateUID(),
-            chat_ready: false,
-            users: [],
-            messages: [],
-            message: ''
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (BotChat.__proto__ || Object.getPrototypeOf(BotChat)).apply(this, arguments));
     }
-
-    // componentDidMount(){
-    //     if(this.state.username.length) {
-    //         this.initChat();
-    //     }
-    // }
-
-    _createClass(BotChat, [{
-        key: "generateUID",
-        value: function generateUID() {
-            var text = '';
-            var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            for (var i = 0; i < 15; i++) {
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            localStorage.setItem('uid', text);
-            return text;
-        }
-
-        // setUsername(username, e){
-        //     this.setState({
-        //         username : username
-        //     }, () => {
-        //         this.initChat();
-        //     });
-        // }
-
-        // // refactor for bot api
-        //     sendMessage(message, e){
-        //         console.log(message);
-        //         this.setState({
-        //             messages : this.state.messages.concat([{
-        //                username : localStorage.getItem('username'),
-        //                uid : localStorage.getItem('uid'),
-        //                message : message,
-        //            }])
-        //         });
-        //         this.socket.emit('message', {
-        //             username : localStorage.getItem('username'),
-        //             uid : localStorage.getItem('uid'),
-        //             message : message,
-        //         });
-        //         this.scrollToBottom();
-        //     }
-
-    }, {
-        key: "scrollToBottom",
-        value: function scrollToBottom() {
-            var messages = document.getElementsByClassName('messages')[0];
-            messages.scrollTop = messages.scrollHeight - messages.clientHeight;
-        }
-
-        // // refactor for bot messages state
-        //     initChat(){
-        //         localStorage.setItem('username', this.state.username);
-        //         this.setState({
-        //             chat_ready : true,
-        //         });
-        //         this.socket = socketIOClient('ws://localhost:8989', {
-        //             query : 'username='+this.state.username+'&uid='+this.state.uid
-        //         });
-        //
-        //         this.socket.on('updateUsersList', function (users) {
-        //             console.log(users);
-        //             this.setState({
-        //                 users : users
-        //             });
-        //         }.bind(this));
-        //
-        //         this.socket.on('message', function (message) {
-        //             this.setState({
-        //                 messages : this.state.messages.concat([message])
-        //             });
-        //             this.scrollToBottom();
-        //         }.bind(this));
-        //     }
-
-    }, {
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "div",
-                { className: "chat" },
-                this.state.chat_ready ? _react2.default.createElement(
-                    _react2.default.Fragment,
-                    null,
-                    _react2.default.createElement(_Users2.default, { users: this.state.users }),
-                    _react2.default.createElement(_BotMessages2.default, {
-                        sendMessage: this.sendMessage.bind(this),
-                        messages: this.state.messages
-                    })
-                ) : _react2.default.createElement(_EnterChat2.default, {
-                    setUsername: this.setUsername.bind(this)
-                })
-            );
-        }
-    }]);
 
     return BotChat;
 }(_react2.default.Component);
@@ -53797,8 +53710,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
@@ -53814,69 +53725,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var BotChatBox = function (_React$Component) {
     _inherits(BotChatBox, _React$Component);
 
-    function BotChatBox(props) {
+    function BotChatBox() {
         _classCallCheck(this, BotChatBox);
 
-        var _this = _possibleConstructorReturn(this, (BotChatBox.__proto__ || Object.getPrototypeOf(BotChatBox)).call(this, props));
-
-        _this.state = {
-            message: ''
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (BotChatBox.__proto__ || Object.getPrototypeOf(BotChatBox)).apply(this, arguments));
     }
-
-    _createClass(BotChatBox, [{
-        key: 'onChange',
-        value: function onChange(e) {
-            this.setState({
-                message: e.target.value
-            });
-        }
-    }, {
-        key: 'onKeyUp',
-        value: function onKeyUp(e) {
-            if (e.key === 'Enter') {
-                if (this.state.message.length) {
-                    this.props.sendMessage({
-                        type: 'message',
-                        text: this.state.message
-                    });
-                    this.setState({ message: '' });
-                } else {
-                    alert('Please enter a message');
-                }
-            }
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { className: 'input-group chatbox col-xs-12 col-sm-12 col-md-8 col-lg-10' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'input-group-prepend' },
-                    _react2.default.createElement(
-                        'button',
-                        {
-                            className: 'btn btn-outline-secondary',
-                            type: 'button',
-                            onClick: this.props.toggleGif
-                        },
-                        _react2.default.createElement('i', { className: 'fa fa-image' }),
-                        ' GIF'
-                    )
-                ),
-                _react2.default.createElement('input', {
-                    className: 'form-control',
-                    placeholder: 'Say hi to the Monkey Talk Bot!',
-                    value: this.state.message,
-                    onChange: this.onChange.bind(this),
-                    onKeyUp: this.onKeyUp.bind(this)
-                })
-            );
-        }
-    }]);
 
     return BotChatBox;
 }(_react2.default.Component);
@@ -53945,7 +53798,12 @@ var BotHome = function (_React$Component) {
             return _react2.default.createElement(
                 _react2.default.Fragment,
                 null,
-                _react2.default.createElement(_Navbar2.default, null)
+                _react2.default.createElement(_Navbar2.default, null),
+                _react2.default.createElement(
+                    'center',
+                    null,
+                    _react2.default.createElement('iframe', { src: ' https://snatchbot.me/webchat/?botID=29961&appID=gKcD32Tvtc1gVMXJ2jZI', width: '100%', height: '777px' })
+                )
             );
         }
     }]);
@@ -53970,8 +53828,6 @@ exports.default = BotHome;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
@@ -54000,80 +53856,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var BotMessages = function (_React$Component) {
     _inherits(BotMessages, _React$Component);
 
-    function BotMessages(props) {
+    function BotMessages() {
         _classCallCheck(this, BotMessages);
 
-        var _this = _possibleConstructorReturn(this, (BotMessages.__proto__ || Object.getPrototypeOf(BotMessages)).call(this, props));
-
-        _this.state = {
-            height: 0,
-            messages: props.messages,
-            gif: false
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (BotMessages.__proto__ || Object.getPrototypeOf(BotMessages)).apply(this, arguments));
     }
-
-    _createClass(BotMessages, [{
-        key: "componentDidMount",
-        value: function componentDidMount() {
-            this.assignHeight();
-            window.addEventListener("resize", this.assignHeight.bind(this));
-        }
-    }, {
-        key: "assignHeight",
-        value: function assignHeight() {
-            var chat_height = this.state.gif ? 200 : 35;
-            var _docHeight = document.height !== undefined ? document.height : document.body.offsetHeight;
-            this.setState({
-                height: _docHeight - 65 - chat_height
-            });
-        }
-    }, {
-        key: "componentWillUnmount",
-        value: function componentWillUnmount() {
-            window.removeEventListener("resize", this.assignHeight.bind(this));
-        }
-    }, {
-        key: "toggleGif",
-        value: function toggleGif(e) {
-            var _this2 = this;
-
-            this.setState({
-                gif: !this.state.gif
-            }, function () {
-                _this2.assignHeight();
-            });
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "div",
-                { className: "messages col-xs-12 col-sm-12 col-md-8 col-lg-10", style: { height: this.state.height + 'px' } },
-                this.state.messages.length ? this.state.messages.map(function (message, i) {
-                    return _react2.default.createElement(BotMessage, { key: i, message: message });
-                }) : _react2.default.createElement(
-                    "div",
-                    { className: "no-message" },
-                    "You have not contacted Code Monkeys"
-                ),
-                this.state.gif ? _react2.default.createElement(_GifBox2.default, {
-                    sendMessage: this.props.sendMessage,
-                    toggleGif: this.toggleGif.bind(this)
-                }) : _react2.default.createElement(ChatBox, {
-                    sendMessage: this.props.sendMessage,
-                    toggleGif: this.toggleGif.bind(this)
-                })
-            );
-        }
-    }], [{
-        key: "getDerivedStateFromProps",
-        value: function getDerivedStateFromProps(nextProps, prevState) {
-            return {
-                messages: nextProps.messages
-            };
-        }
-    }]);
 
     return BotMessages;
 }(_react2.default.Component);
