@@ -15,8 +15,9 @@ class BotHome extends React.Component{
             <React.Fragment>
                 <Navbar />
                   {/* <BotChat /> */}
-
-
+                  <center>
+                    <iframe src=" https://snatchbot.me/webchat/?botID=29961&appID=gKcD32Tvtc1gVMXJ2jZI" width="100%" height="777px"></iframe>
+                  </center>
             </React.Fragment>
         )
     }
