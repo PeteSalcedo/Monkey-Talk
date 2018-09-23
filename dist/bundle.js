@@ -52950,9 +52950,9 @@ module.exports = __webpack_amd_options__;
 /***/ }),
 
 /***/ "./node_modules/webpack/buildin/global.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
+/*!************************************************!*\
+  !*** ./node_modules/webpack/buildin/global.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -52981,9 +52981,9 @@ module.exports = g;
 /***/ }),
 
 /***/ "./node_modules/webpack/buildin/module.js":
-/*!***********************************!*\
-  !*** (webpack)/buildin/module.js ***!
-  \***********************************/
+/*!************************************************!*\
+  !*** ./node_modules/webpack/buildin/module.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -53368,6 +53368,10 @@ var _BotChat = __webpack_require__(/*! ./components/chat/BotChat */ "./src/compo
 
 var _BotChat2 = _interopRequireDefault(_BotChat);
 
+var _PhotoHome = __webpack_require__(/*! ./components/Photos/PhotoHome.js */ "./src/components/Photos/PhotoHome.js");
+
+var _PhotoHome2 = _interopRequireDefault(_PhotoHome);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -53400,6 +53404,7 @@ var App = function (_React$Component) {
                         null,
                         _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/BotHome', component: _BotHome2.default }),
+                        _react2.default.createElement(_reactRouterDom.Route, { path: '/PhotoHome', component: _PhotoHome2.default }),
                         _react2.default.createElement(_reactRouterDom.Route, { path: '/Videos', component: _Videos2.default })
                     )
                 )
@@ -53470,6 +53475,15 @@ var Links = function Links() {
           _reactRouterDom.Link,
           { to: "/BotHome" },
           "Monkey Bot"
+        )
+      ),
+      _react2.default.createElement(
+        "li",
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: "/PhotoHome" },
+          "Photos"
         )
       ),
       _react2.default.createElement(
@@ -53568,6 +53582,225 @@ var Navbar = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Navbar;
+
+/***/ }),
+
+/***/ "./src/components/Photos/Carousel.js":
+/*!*******************************************!*\
+  !*** ./src/components/Photos/Carousel.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+__webpack_require__(/*! ./Carousel.scss */ "./src/components/Photos/Carousel.scss");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var imgUrls = ["https://cmeimg-a.akamaihd.net/640/clsd/getty/c64f76dc20c246ca88ee180fe4b4b781", "https://lh3.googleusercontent.com/oxPeODS2m6rYIVbhcQChRtOWEYeGDwbeeeB1cDU2o_WYAVPU61VIgx-_6BAh5gSL8Sw=h900", "https://i0.wp.com/www.universodegatos.com/wp-content/uploads/2017/04/fivfelv7.jpg?resize=582%2C328", "https://i.pinimg.com/736x/07/c3/45/07c345d0eca11d0bc97c894751ba1b46.jpg", "https://ehealthforum.com/health/images/avatars/11699147425707699031013.jpeg"];
+
+var Carousel = function (_React$Component) {
+	_inherits(Carousel, _React$Component);
+
+	function Carousel(props) {
+		_classCallCheck(this, Carousel);
+
+		var _this = _possibleConstructorReturn(this, (Carousel.__proto__ || Object.getPrototypeOf(Carousel)).call(this, props));
+
+		_this.state = {
+			currentImageIndex: 0
+		};
+
+		_this.nextSlide = _this.nextSlide.bind(_this);
+		_this.previousSlide = _this.previousSlide.bind(_this);
+		return _this;
+	}
+
+	_createClass(Carousel, [{
+		key: 'previousSlide',
+		value: function previousSlide() {
+			var lastIndex = imgUrls.length - 1;
+			var currentImageIndex = this.state.currentImageIndex;
+
+			var shouldResetIndex = currentImageIndex === 0;
+			var index = shouldResetIndex ? lastIndex : currentImageIndex - 1;
+
+			this.setState({
+				currentImageIndex: index
+			});
+		}
+	}, {
+		key: 'nextSlide',
+		value: function nextSlide() {
+			var lastIndex = imgUrls.length - 1;
+			var currentImageIndex = this.state.currentImageIndex;
+
+			var shouldResetIndex = currentImageIndex === lastIndex;
+			var index = shouldResetIndex ? 0 : currentImageIndex + 1;
+
+			this.setState({
+				currentImageIndex: index
+			});
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				'center',
+				null,
+				_react2.default.createElement(
+					'div',
+					{ className: 'carousel' },
+					_react2.default.createElement(Arrow, { direction: 'left', clickFunction: this.previousSlide, glyph: '\u25C0' }),
+					_react2.default.createElement(ImageSlide, { url: imgUrls[this.state.currentImageIndex] }),
+					_react2.default.createElement(Arrow, { direction: 'right', clickFunction: this.nextSlide, glyph: '\u25B6' })
+				)
+			);
+		}
+	}]);
+
+	return Carousel;
+}(_react2.default.Component);
+
+var Arrow = function Arrow(_ref) {
+	var direction = _ref.direction,
+	    clickFunction = _ref.clickFunction,
+	    glyph = _ref.glyph;
+	return _react2.default.createElement(
+		'div',
+		{
+			className: 'slide-arrow ' + direction,
+			onClick: clickFunction },
+		glyph
+	);
+};
+
+var ImageSlide = function ImageSlide(_ref2) {
+	var url = _ref2.url;
+
+	var styles = {
+		backgroundImage: 'url(' + url + ')',
+		backgroundSize: 'cover',
+		backgroundPosition: 'center'
+	};
+
+	return _react2.default.createElement('div', { className: 'image-slide', style: styles });
+};
+
+// ReactDOM.render(
+//   <Carousel />,
+//   document.getElementById('container')
+// );
+
+exports.default = Carousel;
+
+/***/ }),
+
+/***/ "./src/components/Photos/Carousel.scss":
+/*!*********************************************!*\
+  !*** ./src/components/Photos/Carousel.scss ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/components/Photos/PhotoHome.js":
+/*!********************************************!*\
+  !*** ./src/components/Photos/PhotoHome.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+__webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+
+__webpack_require__(/*! font-awesome/css/font-awesome.css */ "./node_modules/font-awesome/css/font-awesome.css");
+
+__webpack_require__(/*! ../../app.scss */ "./src/app.scss");
+
+var _Navbar = __webpack_require__(/*! ../Navbar */ "./src/components/Navbar.js");
+
+var _Navbar2 = _interopRequireDefault(_Navbar);
+
+var _Carousel = __webpack_require__(/*! ./Carousel */ "./src/components/Photos/Carousel.js");
+
+var _Carousel2 = _interopRequireDefault(_Carousel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PhotoHome = function (_React$Component) {
+    _inherits(PhotoHome, _React$Component);
+
+    function PhotoHome() {
+        _classCallCheck(this, PhotoHome);
+
+        return _possibleConstructorReturn(this, (PhotoHome.__proto__ || Object.getPrototypeOf(PhotoHome)).apply(this, arguments));
+    }
+
+    _createClass(PhotoHome, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                _react2.default.Fragment,
+                null,
+                _react2.default.createElement(_Navbar2.default, null),
+                _react2.default.createElement(_Carousel2.default, null),
+                _react2.default.createElement('div', { id: 'container' })
+            );
+        }
+    }]);
+
+    return PhotoHome;
+}(_react2.default.Component);
+
+exports.default = PhotoHome;
 
 /***/ }),
 
@@ -54432,7 +54665,7 @@ var GifBox = function (_React$Component) {
                             'div',
                             { className: 'gif', key: i },
                             _react2.default.createElement('i', {
-                                className: 'fa fa-share-square share',
+                                className: 'fa\r fa-share-square share',
                                 onClick: _this4.sendGIF.bind(_this4, gif)
                             }),
                             _react2.default.createElement('img', { src: gif.fixed, alt: '' })

@@ -11,6 +11,9 @@ const Links = () => (
           <Link to="/BotHome">Monkey Bot</Link>
         </li>
         <li>
+          <Link to="/PhotoHome">Photos</Link>
+        </li>
+        <li>
           <Link to="/Videos">Videos</Link>
         </li>
       </ul>
